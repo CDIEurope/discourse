@@ -23,7 +23,7 @@ public/tombstone/*
 /cache
 /coverage/*
 
-/public/assets/*
+#/public/assets/*
 /public/tombstone/*
 /bundle/*
 
