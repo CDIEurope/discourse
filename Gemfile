@@ -183,6 +183,7 @@ end
 
 gem 'rmmseg-cpp', require: false
 
+gem 'airbrake'
 gem 'logster'
 
 # perftools only works on 1.9 atm
