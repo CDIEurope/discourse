@@ -157,8 +157,12 @@ const Topic = RestModel.extend({
   },
 
   saveStatus(property, value, until) {
-    if (property === 'closed' && value === true) {
-      this.set('details.auto_close_at', null);
+    if (property === 'closed') {
+      this.incrementProperty('posts_count');
+
+      if (value === true) {
+        this.set('details.auto_close_at', null);
+      }
     }
     return Discourse.ajax(this.get('url') + "/status", {
       type: 'PUT',
@@ -472,6 +476,17 @@ Topic.reopenClass({
     }).then(function (result) {
       if (result.success) return result;
       promise.reject(new Error("error changing ownership of posts"));
+    });
+    return promise;
+  },
+
+  changeTimestamp(topicId, timestamp) {
+    const promise = Discourse.ajax("/t/" + topicId + '/change-timestamp', {
+      type: 'PUT',
+      data: { timestamp: timestamp },
+    }).then(function(result) {
+      if (result.success) return result;
+      promise.reject(new Error("error updating timestamp of topic"));
     });
     return promise;
   },
