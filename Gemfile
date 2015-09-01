@@ -183,6 +183,8 @@ end
 
 gem 'rmmseg-cpp', require: false
 
+gem 'rails_12factor', group: :production
+
 gem 'airbrake'
 gem 'logster'
 
